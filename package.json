@@ -1,6 +1,6 @@
 {
   "name": "cypress-automation101",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Framework for TestCon Automation 101 lecture",
   "main": "index.js",
   "dependencies": {},
