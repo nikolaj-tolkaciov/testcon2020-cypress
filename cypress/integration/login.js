@@ -1,6 +1,6 @@
 describe('Login functionality', function() {
+    
     it('Should display validation for empty user after attempted loggin', function () {
-       
         cy.visit('/')
         cy.get('.Select.not-valid').should('not.visible')
         cy.get('[type="submit"]').click()
