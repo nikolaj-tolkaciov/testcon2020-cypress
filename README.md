@@ -3,9 +3,9 @@
 ## How to?
 ### 1. Clone
 
-1. Click [Clone/New] button
-2. Copy paste "https://github.com/nikolaj-tolkaciov/testcon2020-cypress.git" into [Source Path / URL] input
-3. Input your desired path to store the repository on your local machine into [Destination Path] input 
+1. Click [Code] green button above
+2. Click [Open with GitHub Desktop] button
+3. Choose local path to store the repository on your local machine
 4. Click the [Clone] button
 
 ### 2. Install
