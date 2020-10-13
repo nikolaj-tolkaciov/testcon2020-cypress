@@ -16,10 +16,22 @@ describe('Task 2', function() {
         cy.get('.main-nav').find('li').should('have.length', 1)
         cy.get('.main-nav').contains("Time Logging").should('have.css', 'color','rgb(64, 76, 237)')
         
+<<<<<<< Updated upstream
     })
 
     it('T-2: Users should be able to log in with "Team Lead" role and see appropriate tabs', function () {
 
+=======
+        let roles = ["User", "Team Lead", "Manager", "Accountant", "Admin"]
+
+        const nav_length = {
+            "User" : 1,
+            "Team Lead" : 2,
+            "Manager" : 5,
+            "Accountant" : 5,
+            "Admin" : 6,
+        }
+>>>>>>> Stashed changes
         const user = "TestCon User 6"
         const role = "Team Lead"
 
