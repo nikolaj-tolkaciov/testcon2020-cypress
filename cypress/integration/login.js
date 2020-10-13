@@ -21,4 +21,9 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('TestCon User 22')
         cy.get('.main-nav').find('li').should('have.length', 2)
     })
+
+    it('Test current date', () => {
+        const todaysDate = Cypress.moment().format('DD')
+        cy.get('.calendar--today').find('span').contains(todaysDate)
+    })
 })
