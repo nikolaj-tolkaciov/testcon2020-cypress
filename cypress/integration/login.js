@@ -8,6 +8,7 @@ describe('Login functionality', function() {
     })
 
     it('Should be able to login with role Test Lead', function () {
+        var currentDate = new Date();
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 7"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -16,7 +17,7 @@ describe('Login functionality', function() {
 
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
+        cy.get('.calendar--selected').contains(currentDate.getDate())
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('TestCon User 7')
         cy.get('.main-nav').find('li').should('have.length', 2)
