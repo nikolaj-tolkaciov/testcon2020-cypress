@@ -25,10 +25,7 @@ describe('Login functionality verify all roles', function() {
                 roleName: 'Admin',
                 length: 6
             }
-
-
     ];
-
 
     roles.forEach((role) => {
 
@@ -40,7 +37,6 @@ describe('Login functionality verify all roles', function() {
             cy.get(`[aria-label="${role.roleName}"]`).click()
             cy.get('[type="submit"]').click()
 
-            
             cy.url().should('include', '/time-logging')
             cy.get('.page__title').contains('Timesheets')
             cy.get('.calendar').should('be.visible')
@@ -48,8 +44,6 @@ describe('Login functionality verify all roles', function() {
             cy.get('.user-info__title').contains('TestCon User 15')
             cy.get('.main-nav').find('li').should('have.length', role.length)
             cy.get('[aria-labelledby="timeLoggingId"]').should('have.css', 'color', 'rgb(64, 76, 237)')
-
         })
     });
-
 })
