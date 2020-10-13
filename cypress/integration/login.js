@@ -20,5 +20,11 @@ describe('Login functionality', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('TestCon User 8')
         cy.get('.main-nav').find('li').should('have.length', 2)
+
+    
+    })
+
+    it('Shoud display the date as current date', function (){
+        cy.get('.calendar--selected').should('have.class','calendar--today')
     })
 })
