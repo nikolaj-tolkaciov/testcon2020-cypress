@@ -21,4 +21,8 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('Demo User')
         cy.get('.main-nav').find('li').should('have.length', 1)
     })
+
+    it('Should show current date', () => {
+        cy.get('.calendar--today').contains(13)
+    })
 })
