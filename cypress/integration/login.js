@@ -1,50 +1,53 @@
-import Variables from '../obj/variables'
+import LoginPageVariables from '../obj/LoginPage'
+import CalendarPage from '../obj/CalendarPage'
+import TimeLoggingPage from '../obj/TimeLoggingPage'
 
-
-const variables= new Variables()
+const loginVariables= new LoginPageVariables()
+const calendarVariables= new CalendarPage()
+const timeLoggingVariables= new TimeLoggingPage()
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        variables.rootPage()
-        variables.getUserValidationIndicator().should('not.visible')
-        variables.submit().click()
-        variables.getUserValidationIndicator().should('be.visible')
+        loginVariables.rootPage()
+        loginVariables.getUserValidationIndicator().should('not.visible')
+        loginVariables.submit().click()
+        loginVariables.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
         const date = new Date()
 
-        variables.loginFormIdList().click({force:true})
-        variables.loginUserName("TestCon User 10").click()
-        variables.loginRoleIdList().click({force:true})
-        variables.loginRoleName("Team Lead").click()
-        variables.submit().click()
-        variables.getUrl().should('include', '/time-logging')
-        variables.getPageTitle().contains('Timesheets')
-        variables.getCalendar().should('be.visible')
-        variables.getTitleForm().should('be.visible')
-        variables.getUserInfoTitle().contains('TestCon User 10')
-        variables.getMainNavigationBar().find('li').should('have.length', 2)
-        variables.getCalendarBody().should('be.visible')
-        variables.getSelectedCalendarDay().contains(date.getDate())
+        loginVariables.loginFormIdList().click({force:true})
+        loginVariables.loginUserName("TestCon User 10").click()
+        loginVariables.loginRoleIdList().click({force:true})
+        loginVariables.loginRoleName("Team Lead").click()
+        loginVariables.submit().click()
+        timeLoggingVariables.getUrl().should('include', '/time-logging')
+        timeLoggingVariables.getPageTitle().contains('Timesheets')
+        calendarVariables.getCalendar().should('be.visible')
+        timeLoggingVariables.getTitleForm().should('be.visible')
+        timeLoggingVariables.getUserInfoTitle().contains('TestCon User 10')
+        timeLoggingVariables.getMainNavigationBar().should('have.length', 2)
+        calendarVariables.getCalendarBody().should('be.visible')
+        calendarVariables.getSelectedCalendarDay().contains(date.getDate())
     })
     it('Should verify each user role', function (){
         
         let roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin']
         let tabs = [1, 2, 5, 5, 6]
 
-        variables.rootPage()
+        loginVariables.rootPage()
         roles.forEach (function(item, index) {
             
-        variables.loginFormIdList().click({force:true})
-        variables.loginUserName("TestCon User 10").click()
-        variables.loginRoleIdList().click({force:true})
-        variables.loginRoleName(item).click()
-        variables.submit().click()
-        variables.getMainNavigationBar().find('li').should('have.length', tabs[index])
-        variables.getMainHeaderUserName().click()
-        variables.getActiveNavBarItem().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
-        variables.getMainHeaderActionList().contains('Log Out').click()
+            loginVariables.loginFormIdList().click({force:true})
+            loginVariables.loginUserName("TestCon User 10").click()
+            loginVariables.loginRoleIdList().click({force:true})
+            loginVariables.loginRoleName(item).click()
+            loginVariables.submit().click()
+            timeLoggingVariables.getMainNavigationBar().should('have.length', tabs[index])
+            timeLoggingVariables.getMainHeaderUserName().click()
+            timeLoggingVariables.getActiveNavBarItem().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+            timeLoggingVariables.getMainHeaderActionList().contains('Log Out').click()
     })
     })
 })
