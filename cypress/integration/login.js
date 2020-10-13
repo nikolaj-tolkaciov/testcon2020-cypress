@@ -1,4 +1,5 @@
 describe('Login functionality', function() {
+    let d = new Date();
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
@@ -9,16 +10,18 @@ describe('Login functionality', function() {
 
     it('Should be able to login with role User', function () {
         cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="Demo User"]').click()
+        cy.get('[aria-label="TestCon User 26"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="User"]').click()
+        cy.get('[aria-label="Team Lead"]').click()
         cy.get('[type="submit"]').click()
 
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
         cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('Demo User')
-        cy.get('.main-nav').find('li').should('have.length', 1)
+        cy.get('.user-info__title').contains('TestCon User 26')
+        cy.get('.main-nav').find('li').should('have.length', 2)
+        cy.get('.calendar--selected').should('have.class', 'calendar--today')
+        cy.get('.calendar--today').find('span').contains(d.getDate())
     })
 })
