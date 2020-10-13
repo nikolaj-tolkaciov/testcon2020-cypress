@@ -1,32 +1,39 @@
+import LoginPage from '../Objects/loginPageObjects'
+import TimeLine from '../Objects/timeLinePageObjects'
+import Page from '../Objects/page'
+
+const loginPage = new LoginPage()
+const timeLine = new TimeLine()
+const page = new Page()
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit()
+        loginPage.getUserValidattionIntidation().should('not.visible')
+        loginPage.getSubmitButton().click()
+        loginPage.getUserValidattionIntidation().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="TestCon User 1"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="Team Lead"]').click()
-        cy.get('[type="submit"]').click()
+        loginPage.getUserNameField().click({force:true})
+        loginPage.setUserName('TestCon User 1').click()
+        loginPage.getRoleField().click({force:true})
+        loginPage.setRole('Team Lead').click()
+        loginPage.getSubmitButton().click()
 
-        cy.url().should('include', '/time-logging')
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('TestCon User 1')
-        cy.get('.main-nav').find('li').should('have.length', 2)
+        page.getUrl().should('include', '/time-logging')
+        page.getPageTitle().contains('Timesheets')
+        timeLine.getCalendar().should('be.visible')
+        timeLine.getTitleForm().should('be.visible')
+        timeLine.getUserInfo().contains('TestCon User 1')
+        timeLine.getNavigationElements().should('have.length', 2)
     })
 
     it('Should select the current date', function () {
         var d = new Date();
-        cy.get('.calendar--selected .calendar__date').contains(d.getDate()).should('be.visible')  
-        cy.get('.user-info__title').click({force:true});
-        cy.get('[type="button"]').contains('Log Out').click()
+        timeLine.getCalendarDate().contains(d.getDate()).should('be.visible')  
+        timeLine.getUserInfo().click({force:true});
+        timeLine.getUserContextMenuButons().contains('Log Out').click()
     })
 
 
@@ -55,24 +62,22 @@ describe('Login functionality', function() {
         ]
 
         roles.forEach(role => {
-            cy.get('[id="loginForm.userId"]').should('be.visible')
-            cy.get('[id="loginForm.userId"]').click({force: true})
-            cy.get('[aria-label="TestCon User 1"]').click({force: true})
-            cy.get('[id="loginForm.role"]').click({force:true})
-            cy.get(`[aria-label="${role.name}"]`).click()
-            cy.get('[type="submit"]').click()
+            loginPage.getUserNameField().click({force:true})
+            loginPage.setUserName('TestCon User 1').click()
+            loginPage.getRoleField().click({force:true})
+            loginPage.setRole(role.name).click()
+            loginPage.getSubmitButton().click()
     
-            cy.url().should('include', '/time-logging')
-            cy.get('.page__title').should('be.visible')
-            cy.get('.calendar').should('be.visible')
-            cy.get('.tile.form').should('be.visible')
-            cy.get('.user-info__title').contains('TestCon User 1')
-            cy.get('.main-nav').find('li').should('have.length', role.tabsNumber)
-            cy.get('[aria-labelledby="timeLoggingId"]').should('have.css', 'color', 'rgb(64, 76, 237)')
-            cy.get('.user-info__title').click({force:true});
-            cy.get('[type="button"]').contains('Log Out').click()
+            page.getUrl().should('include', '/time-logging')
+            page.getPageTitle().should('be.visible')
+            timeLine.getCalendar().should('be.visible')
+            timeLine.getTitleForm().should('be.visible')
+            timeLine.getUserInfo().contains('TestCon User 1')
+            timeLine.getNavigationElements().should('have.length', role.tabsNumber)
+            timeLine.getTimeLogInID().should('have.css', 'color', 'rgb(64, 76, 237)')
+            timeLine.getUserInfo().click({force:true});
+            timeLine.getUserContextMenuButons().contains('Log Out').click()
         })
     })  
-
 
 })
