@@ -4,28 +4,24 @@ class LoginPage{
         cy.visit('/')
     }
 
-    getvalidateInput(){
+    getValidateInput(){
         return cy.get('.Select.not-valid')
     }
 
-    getsubmitButton(){
+    getSubmitButton(){
         return cy.get('[type="submit"]')
     }
 
-    getUserInput(){
+    getUserInputField(){
         return cy.get('[id="loginForm.userId"]')
     }
 
-    getUserSelect(){
+    getMyUserSelected(){
         return cy.get('[aria-label="TestCon User 5"]')
     }
 
-    getLoginRoleSelect(){
+    getRoleSelectorField(){
         return cy.get('[id="loginForm.role"]')
-    }
-
-    getRoleLead(){
-        return cy.get('[aria-label="Team Lead"]')
     }
 
     getAnyRole(roleName){

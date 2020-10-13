@@ -12,16 +12,16 @@ describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         loginPage.visit()
-        loginPage.getvalidateInput().should('not.visible')
-        loginPage.getsubmitButton().click()
+        loginPage.getValidateInput().should('not.visible')
+        loginPage.getSubmitButton().click()
         loginPage.getvalidateInput().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
-        loginPage.getUserInput().click({force:true})
-        loginPage.getUserSelect().click()
-        loginPage.getLoginRoleSelect().click({force:true})
-        loginPage.getRoleLead().click()
+        loginPage.getUserInputField().click({force:true})
+        loginPage.getMyUserSelected().click()
+        loginPage.getRoleSelectorField().click({force:true})
+        loginPage.getAnyRole('Team Lead').click()
         loginPage.getsubmitButton().click()
         cy.url().should('include', '/time-logging')
         calendarPage.getPageTitle().contains('Timesheets')
@@ -30,20 +30,20 @@ describe('Login functionality', function() {
         calendarPage.getCalendarHeader().contains(todaysDate)
         calendarPage.getTodayDate().contains(day)
         calendarPage.getUserInfo().contains('TestCon User 5')
-        calendarPage.getMenuItemsCount().should('have.length', 2)
+        calendarPage.getMenuItems().should('have.length', 2)
         calendarPage.getUserInfo().click()
         calendarPage.getLogout().click()
     })
 
     it('Should be able to login with all roles', function () {
         for (let i = 0; i < roles.length; i++) {
-            loginPage.getUserInput().click({force:true})
-            loginPage.getUserSelect().click()
-            loginPage.getLoginRoleSelect().click({force:true})
+            loginPage.getUserInputField().click({force:true})
+            loginPage.getMyUserSelected().click()
+            loginPage.getRoleSelectorField().click({force:true})
             loginPage.getAnyRole(roles[i][0]).click()
             loginPage.getsubmitButton().click()
             calendarPage.getUserInfo().contains('TestCon User 5')
-            calendarPage.getMenuItemsCount().should('have.length', roles[i][1])
+            calendarPage.getMenuItems().should('have.length', roles[i][1])
             calendarPage.getTimeLoggingTitle().should('have.css', 'color', 'rgb(64, 76, 237)')
             calendarPage.getUserInfo().click()
             calendarPage.getLogout().click()

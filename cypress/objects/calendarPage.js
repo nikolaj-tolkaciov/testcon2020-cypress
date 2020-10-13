@@ -24,7 +24,7 @@ class CalendarPage{
         return cy.get('.user-info__title')
     }
 
-    getMenuItemsCount(){
+    getMenuItems(){
         return cy.get('.main-nav').find('li')
     }
 
