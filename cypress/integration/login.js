@@ -1,5 +1,6 @@
 const todaysDate = Cypress.moment().format('MMMM YYYY')
 const day = Cypress.moment().format('D')
+const roles= [['User',1],['Team Lead',2], ['Manager',5], ['Accountant',5],['Admin',6]]
 
 
 describe('Login functionality', function() {
@@ -17,7 +18,6 @@ describe('Login functionality', function() {
         cy.get('[id="loginForm.role"]').click({force:true})
         cy.get('[aria-label="Team Lead"]').click()
         cy.get('[type="submit"]').click()
-
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
@@ -26,5 +26,20 @@ describe('Login functionality', function() {
         cy.get('.calendar--today').contains(day)
         cy.get('.user-info__title').contains('TestCon User 5')
         cy.get('.main-nav').find('li').should('have.length', 2)
+    })
+
+    it('Should be able to login with all roles', function () {
+        for (let i = 0; i < roles.length; i++) {
+            cy.get('[id="loginForm.userId"]').click({force:true})
+            cy.get('[aria-label="TestCon User 5"]').click()
+            cy.get('[id="loginForm.role"]').click({force:true})
+            cy.get(`[aria-label="${roles[i][0]}"]`).click()
+            cy.get('[type="submit"]').click()
+            cy.get('.user-info__title').contains('TestCon User 5')
+            cy.get('.main-nav').find('li').should('have.length', roles[i][1])
+            cy.get('[aria-labelledby="timeLoggingId"]').should('have.css', 'color', 'rgb(64, 76, 237)')
+            cy.get('.user-info__title').click()
+            cy.get('.btn__list-item').contains('Log Out').click()
+        }
     })
 })
