@@ -11,3 +11,19 @@ Cypress.Commands.add('loginAs', (role) => {
     window.localStorage.setItem('ACCESS_TOKEN', `userId=1&${USER_ROLES_MAP[role]}`)
 })
 
+Cypress.Commands.add('login', (user, role) => {
+
+    cy.visit('/')
+        cy.get('.Select.not-valid').should('not.visible')
+        cy.get('[type="submit"]').click()
+        cy.get('.Select.not-valid').should('be.visible')
+
+        //Login with "User" role
+        cy.get('[id="loginForm.userId"]').click({force:true})
+        cy.get('[aria-label="'+user+'"]').click()
+        cy.get('[id="loginForm.role"]').click({force:true})
+        cy.get('[aria-label="'+role+'"]').click()
+        cy.get('[type="submit"]').click()
+
+})
+
