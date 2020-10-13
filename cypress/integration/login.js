@@ -22,4 +22,11 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('TestCon User 15')
         cy.get('.main-nav').find('li').should('have.length', 2)
     })
+
+    it('Check if date is selected as today', function () {
+        const todaysDate = Cypress.moment().format('DD')
+        cy.get('.calendar--today').should('contain', todaysDate)
+        cy.get('.calendar--selected').should('have.class', 'calendar--today')
+    })
+
 })
