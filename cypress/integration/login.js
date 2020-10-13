@@ -21,4 +21,10 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('TestCon User 8')
         cy.get('.main-nav').find('li').should('have.length', 2)
     })
+
+    it('Shoud display the date as current date', function (){
+        const date = new Date();
+        const todayDate = date.getDate();
+        cy.get('.calendar--today').should('contain', todayDate)
+    })
 })
