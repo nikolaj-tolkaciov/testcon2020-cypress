@@ -1,8 +1,6 @@
-import LoginPage from '../pom/loginPageObject'
 import TimeLoggingPage from '../pom/timeLoggingPageObject'
 import NavBar from '../pom/navBarObject'
 
-const loginPage = new LoginPage()
 const timeLoggingPage = new TimeLoggingPage()
 const navBar = new NavBar()
 
