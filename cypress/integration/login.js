@@ -21,6 +21,6 @@ describe('Login functionality', function() {
         cy.get('.calendar--selected').contains(date.getDate())    
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('TestCon User 11')
-        cy.get('.main-nav').find('li').should('have.length', 2)   
+        cy.get('.main-nav').find('li').should('have.length', 2)
     })
 })
