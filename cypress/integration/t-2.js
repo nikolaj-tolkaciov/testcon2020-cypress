@@ -30,9 +30,6 @@ describe('t-2 User role', function() {
     it('check time logging tab', function () {
         cy.get('.main-nav').find('li').find('a').should('have.class', 'main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)')
     })
-})
-
-describe('t-2 Team lead role', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
@@ -59,9 +56,6 @@ describe('t-2 Team lead role', function() {
     it('check time logging tab', function () {
         cy.get('.main-nav').find('li').find('a').should('have.class', 'main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)')
     })
-})
-
-describe('t-2 Manager role', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
@@ -88,9 +82,6 @@ describe('t-2 Manager role', function() {
     it('check time logging tab', function () {
         cy.get('.main-nav').find('li').find('a').should('have.class', 'main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)')
     })
-})
-
-describe('t-2 Admin', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
@@ -117,9 +108,6 @@ describe('t-2 Admin', function() {
     it('check time logging tab', function () {
         cy.get('.main-nav').find('li').find('a').should('have.class', 'main-nav__link--active').should('have.css', 'color', 'rgb(64, 76, 237)')
     })
-})
-
-describe('t-2 Accountant', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
