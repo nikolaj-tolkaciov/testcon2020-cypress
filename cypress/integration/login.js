@@ -1,3 +1,8 @@
+import LoginPage from '../objects/loginPage'
+import CalendarPage from '../objects/calendarPage'
+
+const loginPage = new LoginPage()
+const calendarPage = new CalendarPage()
 const todaysDate = Cypress.moment().format('MMMM YYYY')
 const day = Cypress.moment().format('D')
 const roles= [['User',1],['Team Lead',2], ['Manager',5], ['Accountant',5],['Admin',6]]
@@ -6,40 +11,42 @@ const roles= [['User',1],['Team Lead',2], ['Manager',5], ['Accountant',5],['Admi
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit()
+        loginPage.getvalidateInput().should('not.visible')
+        loginPage.getsubmitButton().click()
+        loginPage.getvalidateInput().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="TestCon User 5"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="Team Lead"]').click()
-        cy.get('[type="submit"]').click()
+        loginPage.getUserInput().click({force:true})
+        loginPage.getUserSelect().click()
+        loginPage.getLoginRoleSelect().click({force:true})
+        loginPage.getRoleLead().click()
+        loginPage.getsubmitButton().click()
         cy.url().should('include', '/time-logging')
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.calendar__header').contains(todaysDate)
-        cy.get('.calendar--today').contains(day)
-        cy.get('.user-info__title').contains('TestCon User 5')
-        cy.get('.main-nav').find('li').should('have.length', 2)
+        calendarPage.getPageTitle().contains('Timesheets')
+        calendarPage.getCalendar().should('be.visible')
+        calendarPage.getForm().should('be.visible')
+        calendarPage.getCalendarHeader().contains(todaysDate)
+        calendarPage.getTodayDate().contains(day)
+        calendarPage.getUserInfo().contains('TestCon User 5')
+        calendarPage.getMenuItemsCount().should('have.length', 2)
+        calendarPage.getUserInfo().click()
+        calendarPage.getLogout().click()
     })
 
     it('Should be able to login with all roles', function () {
         for (let i = 0; i < roles.length; i++) {
-            cy.get('[id="loginForm.userId"]').click({force:true})
-            cy.get('[aria-label="TestCon User 5"]').click()
-            cy.get('[id="loginForm.role"]').click({force:true})
-            cy.get(`[aria-label="${roles[i][0]}"]`).click()
-            cy.get('[type="submit"]').click()
-            cy.get('.user-info__title').contains('TestCon User 5')
-            cy.get('.main-nav').find('li').should('have.length', roles[i][1])
-            cy.get('[aria-labelledby="timeLoggingId"]').should('have.css', 'color', 'rgb(64, 76, 237)')
-            cy.get('.user-info__title').click()
-            cy.get('.btn__list-item').contains('Log Out').click()
+            loginPage.getUserInput().click({force:true})
+            loginPage.getUserSelect().click()
+            loginPage.getLoginRoleSelect().click({force:true})
+            loginPage.getAnyRole(roles[i][0]).click()
+            loginPage.getsubmitButton().click()
+            calendarPage.getUserInfo().contains('TestCon User 5')
+            calendarPage.getMenuItemsCount().should('have.length', roles[i][1])
+            calendarPage.getTimeLoggingTitle().should('have.css', 'color', 'rgb(64, 76, 237)')
+            calendarPage.getUserInfo().click()
+            calendarPage.getLogout().click()
         }
     })
 })
