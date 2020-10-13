@@ -1,19 +1,11 @@
 
 describe('Login functionality', function() {
 
-    //
-    // vars and test data
-    //
-
-    // user login
     const user_login = 'TestCon User 3';
 
-    // current date
     let currentDate = new Date();
     let day = currentDate.getDate();
 
-
-    // available roless
     const roles = [
         {
             label: 'User',
@@ -51,7 +43,7 @@ describe('Login functionality', function() {
             cy.get('.Select.not-valid').should('be.visible')
         })
 
-        it('Should be able to login with role User and a calendar should display the current day', function () {
+        it(`Should be able to login with role ${role.label} and view role specific elements`, function () {
             cy.get('[id="loginForm.userId"]').click({force:true})
             cy.get(`[aria-label="${user_login}"]`).click()
             cy.get('[id="loginForm.role"]').click({force:true})
