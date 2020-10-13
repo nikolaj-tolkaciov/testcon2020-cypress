@@ -26,7 +26,9 @@ describe('Login functionality', function() {
 
         const date = new Date();
         const currentDate = date.getDate()
-        cy.get('.tile__title').contains(currentDate)
+
+        cy.get('.calendar--selected').should('have.class', 'calendar--today')
+        cy.get('.calendar--selected').contains(currentDate)
 
     }) 
 })
