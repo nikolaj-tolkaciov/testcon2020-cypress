@@ -14,16 +14,13 @@ Cypress.Commands.add('loginAs', (role) => {
 Cypress.Commands.add('login', (user, role) => {
 
     cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
 
-        //Login with a user
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="'+user+'"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="'+role+'"]').click()
-        cy.get('[type="submit"]').click()
+    //Login with a user
+    cy.get('[id="loginForm.userId"]').click({force:true})
+    cy.get('[aria-label="'+user+'"]').click()
+    cy.get('[id="loginForm.role"]').click({force:true})
+    cy.get('[aria-label="'+role+'"]').click()
+    cy.get('[type="submit"]').click()
 
 })
 
