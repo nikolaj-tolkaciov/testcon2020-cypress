@@ -30,7 +30,7 @@ describe('Task 2', function() {
             timeLoggingPage.getCalendar().should('be.visible')
             timeLoggingPage.getTileForm().should('be.visible')
             navBar.getUserInfo().contains(user)
-            navBar.getMainNavTab().find('li').should('have.length', nav_length[roles[i]])
+            navBar.getListItems().should('have.length', nav_length[roles[i]])
             navBar.getMainNavTab().contains("Time Logging").should('have.css', 'color','rgb(64, 76, 237)')
 
             // Logout

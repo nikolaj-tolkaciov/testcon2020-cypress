@@ -12,6 +12,10 @@ class NavBar {
         return cy.get('.main-header__menu-wrapper')
     }
 
+    getListItems(){
+        return cy.get('.main-nav').find('li')
+    }
+
 }
 
 export default NavBar
