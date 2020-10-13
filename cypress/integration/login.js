@@ -24,7 +24,7 @@ describe('Login functionality', function() {
         let d = new Date();
         let current_day = d.getDate();
 
-        cy.get('.calendar--selected').should('contain', current_day)
+        cy.get('.calendar--today').should('contain', current_day)
 
     })
 
