@@ -37,11 +37,10 @@ describe('Login functionality verify all roles', function() {
 
         it(`Should be able to login with role: ${role.roleName}`, function () {
             loginPage.visit()
-            loginPage.getUserIDIndicator().click({force:true})
+            loginPage.getUserIDInputField().click({force:true})
             loginPage.getUserName("TestCon User 15").click()
             loginPage.getRoleIndicator().click({force:true})
             loginPage.getRoleName(role.roleName).click()
-            //cy.get(`[aria-label="${role.roleName}"]`).click()
             loginPage.getSubminButton().click()
 
             cy.url().should('include', '/time-logging')
@@ -49,8 +48,8 @@ describe('Login functionality verify all roles', function() {
             timeLogging.getCalendar().should('be.visible')
             timeLogging.getTitleForm().should('be.visible')
             timeLogging.getUserTitle().contains('TestCon User 15')
-            timeLogging.getMainNavigationBar().find('li').should('have.length', role.length)
-            timeLogging.getTimeLoggingID().should('have.css', 'color', 'rgb(64, 76, 237)')
+            timeLogging.getMainNavigationBar().should('have.length', role.length)
+            timeLogging.getTimeLoggingLabel().should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     });
 })

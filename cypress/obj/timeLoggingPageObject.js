@@ -17,7 +17,7 @@ class TimeLogging {
     }
 
     getMainNavigationBar(){
-        return cy.get('.main-nav')
+        return cy.get('.main-nav').find('li')
     }
 
     getCalenderToday(){
@@ -28,7 +28,7 @@ class TimeLogging {
         return cy.get('.calendar--selected')
     }
 
-    getTimeLoggingID(){
+    getTimeLoggingLabel(){
         return cy.get('[aria-labelledby="timeLoggingId"]')
     }
 

@@ -11,7 +11,7 @@ class LoginPage{
         return cy.get('[type="submit"]')
     }
 
-    getUserIDIndicator(){
+    getUserIDInputField(){
         return cy.get('[id="loginForm.userId"]')
     }
 

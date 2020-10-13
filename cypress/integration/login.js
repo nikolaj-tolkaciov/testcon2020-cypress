@@ -15,7 +15,7 @@ describe('Login functionality', function() {
 
     it('Should be able to login with role User', function () {
         
-        loginPage.getUserIDIndicator().click({force:true})
+        loginPage.getUserIDInputField().click({force:true})
         loginPage.getUserName("TestCon User 15").click()
         loginPage.getRoleIndicator().click({force:true})
         loginPage.getRoleName("Team Lead").click()
@@ -27,7 +27,7 @@ describe('Login functionality', function() {
         timeLogging.getCalendar().should('be.visible')
         timeLogging.getTitleForm().should('be.visible')
         timeLogging.getUserTitle().contains('TestCon User 15')
-        timeLogging.getMainNavigationBar().find('li').should('have.length', 2)
+        timeLogging.getMainNavigationBar().should('have.length', 2)
     })
 
     it('Check if date is selected as today', function () {
