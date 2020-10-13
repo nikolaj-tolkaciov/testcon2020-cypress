@@ -14,6 +14,7 @@ describe('Login functionality', function() {
         cy.get('[aria-label="User"]').click()
         cy.get('[type="submit"]').click()
 
+        
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
