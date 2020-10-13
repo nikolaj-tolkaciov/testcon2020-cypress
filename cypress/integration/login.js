@@ -1,5 +1,9 @@
 import LoginPage from '../objects/loginPageObject';
+import TimeLoggingPage from '../objects/timeLoggingPageObject';
+
 const loginPage = new LoginPage;
+const timeLoggingPage = new TimeLoggingPage;
+
 
 describe('Login functionality', function() {
 
@@ -47,15 +51,15 @@ describe('Login functionality', function() {
             loginPage.getLoginFormUserRoleInput().click({force:true})
             loginPage.getUserRole(role.label).click()
             loginPage.getFormSubmitBtn().click()
-            loginPage.getUrl().should('include', '/time-logging')
-            loginPage.getTitle().contains('Timesheets')
-            loginPage.getCalendar().should('be.visible')
-            loginPage.getCurrentDay().should('be.visible')
-            loginPage.getCurrentDay().contains(day)
-            loginPage.getTileForm().should('be.visible')
-            loginPage.getUserInfoTitle().contains(userLogin)
-            loginPage.getMainNav().find('li').should('have.length', role.navItems)
-            loginPage.getCurrentNav("timeLoggingId").should('have.css', 'color', 'rgb(64, 76, 237)')
+            timeLoggingPage.getUrl().should('include', '/time-logging')
+            timeLoggingPage.getTitle().contains('Timesheets')
+            timeLoggingPage.getCalendar().should('be.visible')
+            timeLoggingPage.getCurrentDay().should('be.visible')
+            timeLoggingPage.getCurrentDay().contains(day)
+            timeLoggingPage.getTileForm().should('be.visible')
+            timeLoggingPage.getUserInfoTitle().contains(userLogin)
+            timeLoggingPage.getMainNav().find('li').should('have.length', role.navItems)
+            timeLoggingPage.getCurrentNav("timeLoggingId").should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     });
 
