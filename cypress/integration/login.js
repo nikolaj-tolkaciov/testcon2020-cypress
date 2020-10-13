@@ -1,19 +1,21 @@
+import LoginPage from '../obj/loginPageObject'
+
+const loginPage = new LoginPage()
+
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit()
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getLoginButton().click()
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="Demo User"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="User"]').click()
-        cy.get('[type="submit"]').click()
+        cy.loginAs("Admin")
 
+        loginPage.visit()
+        
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
