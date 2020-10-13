@@ -1,19 +1,9 @@
 describe('Task 2', function() {
 
-    it('T-2: All user roles can log in and see appropriate tabs', function () {
-        
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    })
-
     it('T-2: Users should be able to log in with "Team Lead" role and see appropriate tabs', function () {
 
-=======
         let roles = ["User", "Team Lead", "Manager", "Accountant", "Admin"]
 
-=======
-        let roles = ["User", "Team Lead", "Manager", "Accountant", "Admin"]
->>>>>>> bb412c63bf795bb3eded36a9fd0379efc6f63f5e
         const nav_length = {
             "User" : 1,
             "Team Lead" : 2,
@@ -21,10 +11,6 @@ describe('Task 2', function() {
             "Accountant" : 5,
             "Admin" : 6,
         }
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> bb412c63bf795bb3eded36a9fd0379efc6f63f5e
         const user = "TestCon User 6"
         let i = 0
 
