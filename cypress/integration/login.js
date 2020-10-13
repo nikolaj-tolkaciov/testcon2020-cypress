@@ -21,8 +21,8 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('TestCon User 6')
         cy.get('.main-nav').find('li').should('have.length', 2)
 
-        let d = new Date();
-        let current_day = d.getDate();
+        const d = new Date();
+        const current_day = d.getDate();
 
         cy.get('.calendar--today').should('contain', current_day)
 
