@@ -25,4 +25,23 @@ describe('Login functionality', function() {
         cy.get('.calendar__body').should('be.visible')
         cy.get('.calendar--selected').contains(date.getDate())
     })
+    it('Should verify each user role', function (){
+        
+        let roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin']
+        let tabs = [1, 2, 5, 5, 6]
+
+        cy.visit('/')
+        roles.forEach (function(item, index) {
+            
+        cy.get('[id="loginForm.userId"]').click({force:true})
+        cy.get('[aria-label="TestCon User 10"]').click()
+        cy.get('[id="loginForm.role"]').click({force:true})
+        cy.get("[aria-label="+'"'+item+'"'+"]").click()
+        cy.get('[type="submit"]').click()
+        cy.get('.main-nav').find('li').should('have.length', tabs[index])
+        cy.get('.main-header__user-info').click()
+        cy.get('.main-nav__link--active').contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+        cy.get('.main-header__actions').contains('Log Out').click()
+    })
+    })
 })
