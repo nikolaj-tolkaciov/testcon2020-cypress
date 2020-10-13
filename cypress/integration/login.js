@@ -21,4 +21,9 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('TestCon User 1')
         cy.get('.main-nav').find('li').should('have.length', 2)
     })
+
+    it('Should select the current date', function () {
+        var d = new Date();
+        cy.get('.calendar--selected .calendar__date').contains(d.getDate()).should('be.visible')  
+    })
 })
