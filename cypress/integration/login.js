@@ -1,4 +1,5 @@
 describe('Login functionality', function() {
+    let d = new Date();
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
@@ -21,5 +22,6 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('TestCon User 26')
         cy.get('.main-nav').find('li').should('have.length', 2)
         cy.get('.calendar--selected').should('have.class', 'calendar--today')
+        cy.get('.calendar--today').find('span').contains(d.getDate())
     })
 })
