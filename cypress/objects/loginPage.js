@@ -16,8 +16,8 @@ class LoginPage{
         return cy.get('[id="loginForm.userId"]')
     }
 
-    getMyUserSelected(){
-        return cy.get('[aria-label="TestCon User 5"]')
+    getMyUserSelected(user){
+        return cy.get(`[aria-label="${user}"]`)
     }
 
     getRoleSelectorField(){
