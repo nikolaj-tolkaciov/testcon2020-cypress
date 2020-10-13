@@ -1,3 +1,7 @@
+import LoginPage from '../pom/loginPageObject'
+
+const loginPage = new LoginPage()
+
 const USER_ROLES_MAP = {
     "User": "",
     "Team Lead": "role=leads",
@@ -13,14 +17,14 @@ Cypress.Commands.add('loginAs', (role) => {
 
 Cypress.Commands.add('login', (user, role) => {
 
-    cy.visit('/')
+    loginPage.visit()
 
     //Login with a user
-    cy.get('[id="loginForm.userId"]').click({force:true})
-    cy.get('[aria-label="'+user+'"]').click()
-    cy.get('[id="loginForm.role"]').click({force:true})
-    cy.get('[aria-label="'+role+'"]').click()
-    cy.get('[type="submit"]').click()
+    loginPage.getLoginFormForUser().click({force:true})
+    loginPage.getUserName(user).click()
+    loginPage.getLoginFormForRole().click({force:true})
+    loginPage.getRole(role).click()
+    loginPage.getLoginButton().click({force:true})
 
 })
 
