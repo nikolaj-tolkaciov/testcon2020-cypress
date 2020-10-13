@@ -1,32 +1,40 @@
+import LoginPage from '../obj/loginPageObject'
+import TimeLogging from '../obj/timeLoggingPageObject'
+
+const loginPage = new LoginPage()
+const timeLogging = new TimeLogging()
+
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit()
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getLoginButton().click()
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="TestCon User 15"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="Team Lead"]').click()
-        cy.get('[type="submit"]').click()
+        
+        loginPage.getUserIDInputField().click({force:true})
+        loginPage.getUserName("TestCon User 15").click()
+        loginPage.getRoleIndicator().click({force:true})
+        loginPage.getRoleName("Team Lead").click()
+        loginPage.getSubminButton().click()
 
         
         cy.url().should('include', '/time-logging')
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('TestCon User 15')
-        cy.get('.main-nav').find('li').should('have.length', 2)
+        timeLogging.getPageTitle().contains('Timesheets')
+        timeLogging.getCalendar().should('be.visible')
+        timeLogging.getTitleForm().should('be.visible')
+        timeLogging.getUserTitle().contains('TestCon User 15')
+        timeLogging.getMainNavigationBar().should('have.length', 2)
     })
 
     it('Check if date is selected as today', function () {
         const todaysDate = Cypress.moment().format('DD')
-        cy.get('.calendar--today').should('contain', todaysDate)
-        cy.get('.calendar--selected').should('have.class', 'calendar--today')
+        timeLogging.getCalenderToday().should('contain', todaysDate)
+        timeLogging.getCalendarSelected().should('have.class', 'calendar--today')
     })
+
 
 })

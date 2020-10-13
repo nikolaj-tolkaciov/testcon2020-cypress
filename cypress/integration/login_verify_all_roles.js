@@ -1,3 +1,9 @@
+import LoginPage from '../obj/loginPageObject'
+import TimeLogging from '../obj/timeLoggingPageObject'
+
+const loginPage = new LoginPage()
+const timeLogging = new TimeLogging()
+
 describe('Login functionality verify all roles', function() {
 
     const roles = [
@@ -30,20 +36,20 @@ describe('Login functionality verify all roles', function() {
     roles.forEach((role) => {
 
         it(`Should be able to login with role: ${role.roleName}`, function () {
-            cy.visit('/')
-            cy.get('[id="loginForm.userId"]').click({force:true})
-            cy.get('[aria-label="TestCon User 15"]').click()
-            cy.get('[id="loginForm.role"]').click({force:true})
-            cy.get(`[aria-label="${role.roleName}"]`).click()
-            cy.get('[type="submit"]').click()
+            loginPage.visit()
+            loginPage.getUserIDInputField().click({force:true})
+            loginPage.getUserName("TestCon User 15").click()
+            loginPage.getRoleIndicator().click({force:true})
+            loginPage.getRoleName(role.roleName).click()
+            loginPage.getSubminButton().click()
 
             cy.url().should('include', '/time-logging')
-            cy.get('.page__title').contains('Timesheets')
-            cy.get('.calendar').should('be.visible')
-            cy.get('.tile.form').should('be.visible')
-            cy.get('.user-info__title').contains('TestCon User 15')
-            cy.get('.main-nav').find('li').should('have.length', role.length)
-            cy.get('[aria-labelledby="timeLoggingId"]').should('have.css', 'color', 'rgb(64, 76, 237)')
+            timeLogging.getPageTitle().contains('Timesheets')
+            timeLogging.getCalendar().should('be.visible')
+            timeLogging.getTitleForm().should('be.visible')
+            timeLogging.getUserTitle().contains('TestCon User 15')
+            timeLogging.getMainNavigationBar().should('have.length', role.length)
+            timeLogging.getTimeLoggingLabel().should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     });
 })
