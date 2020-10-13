@@ -29,11 +29,6 @@ describe('Login functionality', function() {
         }
     ];
 
-    //
-    // test cases
-    //
-
-
     roles.forEach((role) => {
 
         it('Should display validation for empty user after attempted loggin', function () {
