@@ -1,6 +1,6 @@
 class TimeLoggingPage {
-    calendarShouldbeVisible(){
-        cy.get('.calendar').should('be.visible')
+    getCalendar(){
+       return cy.get('.calendar')
     }
 
     getTileForm() {

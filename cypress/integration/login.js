@@ -16,15 +16,15 @@ describe('Login functionality', function() {
     })
 
     it('Should be able to login with role Team Lead', function () {
-        loginPage.openUserDropdown()
+        loginPage.openUserDropdown().click({force:true})
         loginPage.getUserName("TestCon User 25").click()
-        loginPage.openRoleDropdown()
+        loginPage.openRoleDropdown().click({force:true})
         loginPage.getRole("Team Lead").click()
         loginPage.getLoginButton().click()
 
         cy.url().should('include', '/time-logging')
         header.getPageTitle().contains('Timesheets')
-        timeLoggingPage.calendarShouldbeVisible() // m?:)
+        timeLoggingPage.getCalendar().should('be.visible')
         timeLoggingPage.getTileForm().should('be.visible')
         timeLoggingPage.getUserTitle().contains('TestCon User 25')
         timeLoggingPage.getHeaderMenu().should('have.length', 2)

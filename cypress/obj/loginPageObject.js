@@ -16,11 +16,11 @@ class LoginPage {
     }
 
     openUserDropdown() {
-        return cy.get('[id="loginForm.userId"]').click({force:true})
+        return cy.get('[id="loginForm.userId"]')
     }
 
     openRoleDropdown() {
-        return cy.get('[id="loginForm.role"]').click({force:true})
+        return cy.get('[id="loginForm.role"]')
     }
 
     getRole(role) {
