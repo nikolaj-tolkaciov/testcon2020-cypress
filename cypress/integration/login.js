@@ -14,7 +14,7 @@ describe('Login functionality', function() {
         loginPage.visit()
         loginPage.getValidateInput().should('not.visible')
         loginPage.getSubmitButton().click()
-        loginPage.getvalidateInput().should('be.visible')
+        loginPage.getValidateInput().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
@@ -22,7 +22,7 @@ describe('Login functionality', function() {
         loginPage.getMyUserSelected().click()
         loginPage.getRoleSelectorField().click({force:true})
         loginPage.getAnyRole('Team Lead').click()
-        loginPage.getsubmitButton().click()
+        loginPage.getSubmitButton().click()
         cy.url().should('include', '/time-logging')
         calendarPage.getPageTitle().contains('Timesheets')
         calendarPage.getCalendar().should('be.visible')
@@ -41,7 +41,7 @@ describe('Login functionality', function() {
             loginPage.getMyUserSelected().click()
             loginPage.getRoleSelectorField().click({force:true})
             loginPage.getAnyRole(roles[i][0]).click()
-            loginPage.getsubmitButton().click()
+            loginPage.getSubmitButton().click()
             calendarPage.getUserInfo().contains('TestCon User 5')
             calendarPage.getMenuItems().should('have.length', roles[i][1])
             calendarPage.getTimeLoggingTitle().should('have.css', 'color', 'rgb(64, 76, 237)')
