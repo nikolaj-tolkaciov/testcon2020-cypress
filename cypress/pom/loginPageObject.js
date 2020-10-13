@@ -24,34 +24,6 @@ class LoginPage {
         return cy.get('[id="loginForm.role"]')
     }
 
-    getCalendar(){
-        return cy.get('.calendar')
-    }
-
-    getTileForm(){
-        return cy.get('.tile.form')
-    }
-
-    getUserInfo(){
-        return cy.get('.user-info__title')
-    }
-
-    getMainNavTab(){
-        return cy.get('.main-nav')
-    }
-
-    getUserMenu(){
-        return cy.get('.main-header__menu-wrapper')
-    }
-
-    validateUrl(){
-        cy.url().should('include', '/time-logging')
-    }
-
-    validatePageTitle(){
-        cy.get('.page__title').contains('Timesheets')
-    }
-
 }
 
 export default LoginPage

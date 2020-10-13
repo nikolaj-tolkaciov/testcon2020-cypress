@@ -1,6 +1,10 @@
 import LoginPage from '../pom/loginPageObject'
+import TimeLoggingPage from '../pom/timeLoggingPageObject'
+import NavBar from '../pom/navBarObject'
 
 const loginPage = new LoginPage()
+const timeLoggingPage = new TimeLoggingPage()
+const navBar = new NavBar()
 
 describe('Task 2', function() {
 
@@ -23,17 +27,17 @@ describe('Task 2', function() {
             cy.login(user, roles[i])
 
             //"User" role asserts
-            loginPage.validateUrl()
-            loginPage.validatePageTitle()
-            loginPage.getCalendar().should('be.visible')
-            loginPage.getTileForm().should('be.visible')
-            loginPage.getUserInfo().contains(user)
-            loginPage.getMainNavTab().find('li').should('have.length', nav_length[roles[i]])
-            loginPage.getMainNavTab().contains("Time Logging").should('have.css', 'color','rgb(64, 76, 237)')
+            cy.validateUrl('/time-logging')
+            cy.validatePageTitle('Timesheets')
+            timeLoggingPage.getCalendar().should('be.visible')
+            timeLoggingPage.getTileForm().should('be.visible')
+            navBar.getUserInfo().contains(user)
+            navBar.getMainNavTab().find('li').should('have.length', nav_length[roles[i]])
+            navBar.getMainNavTab().contains("Time Logging").should('have.css', 'color','rgb(64, 76, 237)')
 
             // Logout
-            loginPage.getUserInfo().contains(user).click()
-            loginPage.getUserMenu().contains("Log Out").click()
+            navBar.getUserInfo().contains(user).click()
+            navBar.getUserMenu().contains("Log Out").click()
 
             i++
 

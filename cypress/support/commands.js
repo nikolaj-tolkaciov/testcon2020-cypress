@@ -28,3 +28,15 @@ Cypress.Commands.add('login', (user, role) => {
 
 })
 
+Cypress.Commands.add('validatePageTitle', (title) => {
+
+    cy.get('.page__title').contains(title)
+
+})
+
+Cypress.Commands.add('validateUrl', (url) => {
+
+    cy.url().should('include', url)
+
+})
+
