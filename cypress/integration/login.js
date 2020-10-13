@@ -1,7 +1,13 @@
+import LoginPage from '../objects/loginPageObject';
+import TimeLoggingPage from '../objects/timeLoggingPageObject';
+
+const loginPage = new LoginPage;
+const timeLoggingPage = new TimeLoggingPage;
+
 
 describe('Login functionality', function() {
 
-    const user_login = 'TestCon User 3';
+    const userLogin = 'TestCon User 3';
 
     let currentDate = new Date();
     let day = currentDate.getDate();
@@ -29,31 +35,31 @@ describe('Login functionality', function() {
         }
     ];
 
+    it('Should display validation for empty user after attempted loggin', function () {
+        loginPage.visit();
+        loginPage.getUserValidationIndicator().should('not.visible');
+        loginPage.getLoginButton().click()
+        loginPage.getUserValidationIndicator().should('be.visible')
+    })
+
     roles.forEach((role) => {
 
-        it('Should display validation for empty user after attempted loggin', function () {
-            cy.visit('/')
-            cy.get('.Select.not-valid').should('not.visible')
-            cy.get('[type="submit"]').click()
-            cy.get('.Select.not-valid').should('be.visible')
-        })
-
         it(`Should be able to login with role ${role.label} and view role specific elements`, function () {
-            cy.get('[id="loginForm.userId"]').click({force:true})
-            cy.get(`[aria-label="${user_login}"]`).click()
-            cy.get('[id="loginForm.role"]').click({force:true})
-            cy.get(`[aria-label="${role.label}"]`).click()
-            cy.get('[type="submit"]').click()
-    
-            cy.url().should('include', '/time-logging')
-            cy.get('.page__title').contains('Timesheets')
-            cy.get('.calendar').should('be.visible')
-            cy.get('.calendar--today.calendar--selected').should('be.visible')
-            cy.get('.calendar--today.calendar--selected').contains(day)
-            cy.get('.tile.form').should('be.visible')
-            cy.get('.user-info__title').contains(user_login)
-            cy.get('.main-nav').find('li').should('have.length', role.navItems)
-            cy.get('[aria-labelledby="timeLoggingId"]').should('have.css', 'color', 'rgb(64, 76, 237)')
+            loginPage.visit();
+            loginPage.getLoginFormUserIdInput().click({force:true})
+            loginPage.getUserName(userLogin).click()
+            loginPage.getLoginFormUserRoleInput().click({force:true})
+            loginPage.getUserRole(role.label).click()
+            loginPage.getFormSubmitBtn().click()
+            timeLoggingPage.getUrl().should('include', '/time-logging')
+            timeLoggingPage.getTitle().contains('Timesheets')
+            timeLoggingPage.getCalendar().should('be.visible')
+            timeLoggingPage.getCurrentDay().should('be.visible')
+            timeLoggingPage.getCurrentDay().contains(day)
+            timeLoggingPage.getTileForm().should('be.visible')
+            timeLoggingPage.getUserInfoTitle().contains(userLogin)
+            timeLoggingPage.getMainNavItems().should('have.length', role.navItems)
+            timeLoggingPage.getCurrentNav("timeLoggingId").should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     });
 
