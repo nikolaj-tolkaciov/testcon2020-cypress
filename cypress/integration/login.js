@@ -1,4 +1,4 @@
-describe('User role', function() {
+describe('Logging in with User role', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
@@ -8,6 +8,7 @@ describe('User role', function() {
     })
 
     it('Should be able to login with role User', function () {
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 17"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -20,16 +21,10 @@ describe('User role', function() {
     })
 })
 
-describe('Team Lead role', function() {
-    
-    it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+describe('Logging in with Team Lead role', function() {
 
     it('Should be able to login with role Team Lead', function () {
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 17"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -42,16 +37,10 @@ describe('Team Lead role', function() {
     })
 })
 
-describe('Manager role', function() {
-    
-    it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+describe('Logging in with Manager role', function() {
 
     it('Should be able to login with role Manager', function () {
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 17"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -64,16 +53,10 @@ describe('Manager role', function() {
     })
 })
 
-describe('Accountant role', function() {
-    
-    it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+describe('Logging in with Accountant role', function() {
 
     it('Should be able to login with role Accountant', function () {
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 17"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -86,16 +69,10 @@ describe('Accountant role', function() {
     })
 })
 
-describe('Admin role', function() {
-    
-    it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
-    })
+describe('Logging in with Admin role', function() {
 
     it('Should be able to login with role Admin', function () {
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 17"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
