@@ -6,7 +6,7 @@ class TimeLoggingPage {
     getCurrentDay = () => cy.get('.calendar--today');
     getTileForm = () => cy.get('.tile.form');
     getUserInfoTitle = () => cy.get('.user-info__title');
-    getMainNav = () => cy.get('.main-nav');
+    getMainNavItems = () => cy.get('.main-nav').find('li');
     getCurrentNav = navLabel => cy.get(`[aria-labelledby="${navLabel}"]`);
 
 }

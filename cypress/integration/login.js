@@ -58,7 +58,7 @@ describe('Login functionality', function() {
             timeLoggingPage.getCurrentDay().contains(day)
             timeLoggingPage.getTileForm().should('be.visible')
             timeLoggingPage.getUserInfoTitle().contains(userLogin)
-            timeLoggingPage.getMainNav().find('li').should('have.length', role.navItems)
+            timeLoggingPage.getMainNavItems().should('have.length', role.navItems)
             timeLoggingPage.getCurrentNav("timeLoggingId").should('have.css', 'color', 'rgb(64, 76, 237)')
         })
     });
