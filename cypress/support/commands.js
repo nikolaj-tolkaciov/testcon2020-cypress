@@ -18,7 +18,7 @@ Cypress.Commands.add('login', (user, role) => {
         cy.get('[type="submit"]').click()
         cy.get('.Select.not-valid').should('be.visible')
 
-        //Login with "User" role
+        //Login with a user
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="'+user+'"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
