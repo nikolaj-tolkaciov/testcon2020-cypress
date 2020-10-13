@@ -41,8 +41,6 @@ describe('Login functionality', function() {
             ['Admin',6]
         ]
 
-        let tabs = [1, 2, 5, 5, 6]
-
         loginVariables.getRootPage()
         for(let i = 0; i < roles.length; i++) {
             
