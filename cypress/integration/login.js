@@ -1,3 +1,6 @@
+const todaysDate = Cypress.moment().format('MMMM YYYY')
+const day = Cypress.moment().format('D')
+
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
@@ -13,10 +16,11 @@ describe('Login functionality', function() {
         cy.get('[id="loginForm.role"]').click({force:true})
         cy.get('[aria-label="User"]').click()
         cy.get('[type="submit"]').click()
-
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
+        cy.get('.calendar__header').contains(todaysDate)
+        cy.get('.calendar--today').contains(day)
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Demo User')
         cy.get('.main-nav').find('li').should('have.length', 1)
