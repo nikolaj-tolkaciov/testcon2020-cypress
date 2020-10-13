@@ -23,6 +23,7 @@ describe('Login functionality', function() {
     })
 
     it('Test current date', () => {
-        cy.get('[data-test="timesheets-current-day"]').find('span').contains(13)
+        const todaysDate = Cypress.moment().format('DD')
+        cy.get('.calendar--today').find('span').contains(todaysDate)
     })
 })
