@@ -23,6 +23,10 @@ describe('Login functionality', function() {
     })
     
     it('Shoud be selected today', function (){
-        cy.get('.calendar--selected').should('have.class','calendar--today')
+        const todaysDay = Cypress.moment().format('DD')
+
+        cy.get('.calendar--selected')
+            .should('have.class','calendar--today')
+            .should('have.text', todaysDay)
     })
 })
