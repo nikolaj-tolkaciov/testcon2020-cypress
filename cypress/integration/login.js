@@ -1,6 +1,5 @@
 let currentDate = new Date();
 let day = currentDate.getDate();
-console.log(day);
 
 describe('Login functionality', function() {
     
