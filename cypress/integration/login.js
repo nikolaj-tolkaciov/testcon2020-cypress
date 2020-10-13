@@ -23,6 +23,6 @@ describe('Login functionality', function() {
     })
 
     it('Should show current date', () => {
-        cy.get('.calendar--today').contains(13)
-    })
+        cy.get('.calendar--today').contains(new Date().getDate());
+    });
 })
