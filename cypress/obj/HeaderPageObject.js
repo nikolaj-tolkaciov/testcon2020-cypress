@@ -1,4 +1,4 @@
-class Header { //HeaderPage?
+class Header {
     getPageTitle(){
         return cy.get('.page__title')
      }
