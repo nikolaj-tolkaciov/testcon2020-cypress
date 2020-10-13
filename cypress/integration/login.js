@@ -21,4 +21,8 @@ describe('Login functionality', function() {
         cy.get('.user-info__title').contains('Demo User')
         cy.get('.main-nav').find('li').should('have.length', 1)
     })
+
+    it('Test current date', () => {
+        cy.get('[data-test="timesheets-current-day"]').find('span').contains(13)
+    })
 })
