@@ -14,9 +14,8 @@ describe('Login functionality', function() {
     })
 
     it('Check tabs for User', function () {
-        cy.get('.user-info__title').click()
-        cy.xpath('//body/div[@id="root"]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/button[2]').click()
-
+       
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 13"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -30,9 +29,7 @@ describe('Login functionality', function() {
     })
 
     it('Check tabs for Manager', function () {
-        cy.get('.user-info__title').click()
-        cy.xpath('//body/div[@id="root"]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/button[2]').click()
-
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 13"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -46,9 +43,7 @@ describe('Login functionality', function() {
     })
 
     it('Check tabs for Accountant', function () {
-        cy.get('.user-info__title').click()
-        cy.xpath('//body/div[@id="root"]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/button[2]').click()
-
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 13"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
@@ -62,9 +57,7 @@ describe('Login functionality', function() {
     })
 
     it('Check tabs for Admin', function () {
-        cy.get('.user-info__title').click()
-        cy.xpath('//body/div[@id="root"]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/button[2]').click()
-
+        cy.visit('/')
         cy.get('[id="loginForm.userId"]').click({force:true})
         cy.get('[aria-label="TestCon User 13"]').click()
         cy.get('[id="loginForm.role"]').click({force:true})
