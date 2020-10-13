@@ -1,24 +1,28 @@
+import LoginPage from '../obj/loginPageObject'
+
+const loginPage = new LoginPage()
+
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
+        loginPage.visit()
+        loginPage.getUserValidationIndicator().should('not.visible')
+        loginPage.getLoginButton().click()
+        loginPage.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="TestCon User 8"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="Team Lead"]').click()
-        cy.get('[type="submit"]').click()
-
-        cy.url().should('include', '/time-logging')
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('TestCon User 8')
-        cy.get('.main-nav').find('li').should('have.length', 2)
+        loginPage.getLoginFormUserId().click({force:true})
+        loginPage.getUserName("TestCon User 8").click()
+        loginPage.getLoginFormRoleId().click({force:true})
+        loginPage.getUserRole().click()
+        loginPage.getSubmitButton().click()
+ 
+        loginPage.getUrl()
+        loginPage.getPageTitle() 
+        loginPage.getCalendarIsVisible().should('be.visible')
+        loginPage.getTitleForm().should('be.visible')
+        loginPage.getUserTitle().contains('TestCon User 8')
+        loginPage.getMenuNumber().should('have.length', 2)
     })
 })
