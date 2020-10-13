@@ -8,20 +8,20 @@ const timeLoggingVariables= new TimeLoggingPage()
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        loginVariables.rootPage()
+        loginVariables.getRootPage()
         loginVariables.getUserValidationIndicator().should('not.visible')
-        loginVariables.submit().click()
+        loginVariables.getSubmit().click()
         loginVariables.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
         const date = new Date()
 
-        loginVariables.loginFormIdList().click({force:true})
-        loginVariables.loginUserName("TestCon User 10").click()
-        loginVariables.loginRoleIdList().click({force:true})
-        loginVariables.loginRoleName("Team Lead").click()
-        loginVariables.submit().click()
+        loginVariables.getLoginUserDropdown().click({force:true})
+        loginVariables.getLoginUserName("TestCon User 10").click()
+        loginVariables.getLoginRoleIdList().click({force:true})
+        loginVariables.getLoginRoleName("Team Lead").click()
+        loginVariables.getSubmit().click()
         timeLoggingVariables.getUrl().should('include', '/time-logging')
         timeLoggingVariables.getPageTitle().contains('Timesheets')
         calendarVariables.getCalendar().should('be.visible')
@@ -33,21 +33,28 @@ describe('Login functionality', function() {
     })
     it('Should verify each user role', function (){
         
-        let roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin']
+        let roles = [
+            ['User',1],
+            ['Team Lead',2], 
+            ['Manager',5], 
+            ['Accountant',5], 
+            ['Admin',6]
+        ]
+
         let tabs = [1, 2, 5, 5, 6]
 
-        loginVariables.rootPage()
-        roles.forEach (function(item, index) {
+        loginVariables.getRootPage()
+        for(let i = 0; i < roles.length; i++) {
             
-            loginVariables.loginFormIdList().click({force:true})
-            loginVariables.loginUserName("TestCon User 10").click()
-            loginVariables.loginRoleIdList().click({force:true})
-            loginVariables.loginRoleName(item).click()
-            loginVariables.submit().click()
-            timeLoggingVariables.getMainNavigationBar().should('have.length', tabs[index])
+            loginVariables.getLoginUserDropdown().click({force:true})
+            loginVariables.getLoginUserName("TestCon User 10").click()
+            loginVariables.getLoginRoleIdList().click({force:true})
+            loginVariables.getLoginRoleName(roles[i][0]).click()
+            loginVariables.getSubmit().click()
+            timeLoggingVariables.getMainNavigationBar().should('have.length', roles[i][1])
             timeLoggingVariables.getMainHeaderUserName().click()
             timeLoggingVariables.getActiveNavBarItem().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
             timeLoggingVariables.getMainHeaderActionList().contains('Log Out').click()
-    })
+    }
     })
 })

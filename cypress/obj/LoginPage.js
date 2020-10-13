@@ -1,24 +1,24 @@
 class LoginPageVariables {
 
-    rootPage(){
+    getRootPage(){
         cy.visit('/')
     }
     getUserValidationIndicator(){
         return cy.get('.Select.not-valid')
     }
-    submit(){
+    getSubmit(){
         return cy.get('[type="submit"]')
     }
-    loginFormIdList(){
+    getLoginUserDropdown(){
         return cy.get('[id="loginForm.userId"]')
     }
-    loginRoleIdList(){
+    getLoginRoleIdList(){
         return cy.get('[id="loginForm.role"]')
     }
-    loginUserName(userName){
+    getLoginUserName(userName){
         return cy.get('[aria-label="'+userName+'"]')
     }
-    loginRoleName(role){
+    getLoginRoleName(role){
         return cy.get('[aria-label="'+role+'"]')
     }
 }
