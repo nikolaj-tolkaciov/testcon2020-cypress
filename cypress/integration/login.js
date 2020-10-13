@@ -17,7 +17,8 @@ describe('Login functionality', function() {
         cy.url().should('include', '/time-logging')
         cy.get('.page__title').contains('Timesheets')
         cy.get('.calendar').should('be.visible')
-        cy.get('.calendar--selected').contains('13')     
+        var date = new Date();
+        cy.get('.calendar--selected').contains(date.getDate())    
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('Demo User')
         cy.get('.main-nav').find('li').should('have.length', 1)   
