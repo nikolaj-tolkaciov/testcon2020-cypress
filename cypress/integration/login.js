@@ -1,5 +1,5 @@
 describe('Login functionality', function() {
-    
+
     it('Should display validation for empty user after attempted loggin', function () {
         cy.visit('/')
         cy.get('.Select.not-valid').should('not.visible')
@@ -20,5 +20,12 @@ describe('Login functionality', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('TestCon User 6')
         cy.get('.main-nav').find('li').should('have.length', 2)
+
+        let d = new Date();
+        let current_day = d.getDate();
+
+        cy.get('.calendar--selected').should('contain', current_day)
+
     })
+
 })
