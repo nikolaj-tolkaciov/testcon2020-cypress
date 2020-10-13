@@ -1,47 +1,58 @@
+import LoginPageVariables from '../obj/LoginPage'
+import CalendarPage from '../obj/CalendarPage'
+import TimeLoggingPage from '../obj/TimeLoggingPage'
+
+const loginVariables= new LoginPageVariables()
+const calendarVariables= new CalendarPage()
+const timeLoggingVariables= new TimeLoggingPage()
 describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
-        cy.visit('/')
-        cy.get('.Select.not-valid').should('not.visible')
-        cy.get('[type="submit"]').click()
-        cy.get('.Select.not-valid').should('be.visible')
+        loginVariables.getRootPage()
+        loginVariables.getUserValidationIndicator().should('not.visible')
+        loginVariables.getSubmit().click()
+        loginVariables.getUserValidationIndicator().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {
         const date = new Date()
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="TestCon User 10"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get('[aria-label="Team Lead"]').click()
-        cy.get('[type="submit"]').click()
 
-        cy.url().should('include', '/time-logging')
-        cy.get('.page__title').contains('Timesheets')
-        cy.get('.calendar').should('be.visible')
-        cy.get('.tile.form').should('be.visible')
-        cy.get('.user-info__title').contains('TestCon User 10')
-        cy.get('.main-nav').find('li').should('have.length', 2)
-
-        cy.get('.calendar__body').should('be.visible')
-        cy.get('.calendar--selected').contains(date.getDate())
+        loginVariables.getLoginUserDropdown().click({force:true})
+        loginVariables.getLoginUserName("TestCon User 10").click()
+        loginVariables.getLoginRoleIdList().click({force:true})
+        loginVariables.getLoginRoleName("Team Lead").click()
+        loginVariables.getSubmit().click()
+        timeLoggingVariables.getUrl().should('include', '/time-logging')
+        timeLoggingVariables.getPageTitle().contains('Timesheets')
+        calendarVariables.getCalendar().should('be.visible')
+        timeLoggingVariables.getTitleForm().should('be.visible')
+        timeLoggingVariables.getUserInfoTitle().contains('TestCon User 10')
+        timeLoggingVariables.getMainNavigationBar().should('have.length', 2)
+        calendarVariables.getCalendarBody().should('be.visible')
+        calendarVariables.getSelectedCalendarDay().contains(date.getDate())
     })
     it('Should verify each user role', function (){
         
-        let roles = ['User', 'Team Lead', 'Manager', 'Accountant', 'Admin']
-        let tabs = [1, 2, 5, 5, 6]
+        let roles = [
+            ['User',1],
+            ['Team Lead',2], 
+            ['Manager',5], 
+            ['Accountant',5], 
+            ['Admin',6]
+        ]
 
-        cy.visit('/')
-        roles.forEach (function(item, index) {
+        loginVariables.getRootPage()
+        for(let i = 0; i < roles.length; i++) {
             
-        cy.get('[id="loginForm.userId"]').click({force:true})
-        cy.get('[aria-label="TestCon User 10"]').click()
-        cy.get('[id="loginForm.role"]').click({force:true})
-        cy.get("[aria-label="+'"'+item+'"'+"]").click()
-        cy.get('[type="submit"]').click()
-        cy.get('.main-nav').find('li').should('have.length', tabs[index])
-        cy.get('.main-header__user-info').click()
-        cy.get('.main-nav__link--active').contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
-        cy.get('.main-header__actions').contains('Log Out').click()
-    })
+            loginVariables.getLoginUserDropdown().click({force:true})
+            loginVariables.getLoginUserName("TestCon User 10").click()
+            loginVariables.getLoginRoleIdList().click({force:true})
+            loginVariables.getLoginRoleName(roles[i][0]).click()
+            loginVariables.getSubmit().click()
+            timeLoggingVariables.getMainNavigationBar().should('have.length', roles[i][1])
+            timeLoggingVariables.getMainHeaderUserName().click()
+            timeLoggingVariables.getActiveNavBarItem().contains('Time Logging').should('have.css', 'color', 'rgb(64, 76, 237)')
+            timeLoggingVariables.getMainHeaderActionList().contains('Log Out').click()
+    }
     })
 })
