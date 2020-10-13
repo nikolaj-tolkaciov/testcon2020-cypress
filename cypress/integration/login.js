@@ -24,8 +24,6 @@ describe('Login functionality', function() {
 
     it('Should select the current date', function () {
         var d = new Date();
-        var currentDay = d.getDate();
-        cy.get('.calendar__date').contains(currentDay).click({force:true})
-        cy.get('.calendar--selected .calendar__date').contains(currentDay).should('be.visible')  
+        cy.get('.calendar--selected .calendar__date').contains(d.getDate()).should('be.visible')  
     })
 })
