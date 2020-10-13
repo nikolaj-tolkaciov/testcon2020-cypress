@@ -24,8 +24,9 @@ describe('Login functionality', function() {
     })
     it('Check if date is selected as today', function () {
         const todaysDate = Cypress.moment().format('DD')
-        cy.get('[ data-test="timesheets-current-day"]').should('contain', todaysDate)
-        cy.get('[class="calendar__day calendar--today calendar--selected"]').should('be.visible')
+        cy.get('.calendar--today').should('contain', todaysDate)
+        cy.get('.calendar--selected').should('be.visible')
+
     })
 
 })
