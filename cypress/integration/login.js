@@ -20,6 +20,12 @@ describe('Login functionality', function() {
         cy.get('.tile.form').should('be.visible')
         cy.get('.user-info__title').contains('TestCon User 17')
         cy.get('.main-nav').find('li').should('have.length', 2)
-        cy.get('.calendar--selected').contains('13')
+    })
+
+    it('Selected day should be today', function () 
+    {
+        const day = new Date();
+        const todaysDate = day.getDate();
+        cy.get('.calendar--today').should('contain', todaysDate)
     })
 })
