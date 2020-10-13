@@ -9,9 +9,9 @@ describe('Login functionality', function() {
     
     it('Should display validation for empty user after attempted loggin', function () {
         loginPage.visit()
-        loginPage.getUserValidattionIntidation().should('not.visible')
+        loginPage.getUserValidation().should('not.visible')
         loginPage.getSubmitButton().click()
-        loginPage.getUserValidattionIntidation().should('be.visible')
+        loginPage.getUserValidation().should('be.visible')
     })
 
     it('Should be able to login with role User', function () {

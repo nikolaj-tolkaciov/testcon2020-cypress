@@ -3,7 +3,7 @@ class LoginPage{
         cy.visit('/')
     }
 
-    getUserValidattionIntidation () {
+    getUserValidation () {
         return cy.get('.Select.not-valid')
     }
 
@@ -11,11 +11,9 @@ class LoginPage{
         return cy.get('[type="submit"]')
     }
 
-
     getUserNameField (){
         return  cy.get('[id="loginForm.userId"]')
     }
-
 
     setUserName(user){
        return cy.get('[aria-label="'+user+'"]')
